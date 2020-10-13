@@ -16,19 +16,16 @@ parser.add_argument("--CannyD", type=int, default=150)
 parser.add_argument("--result", default="img")
 
 def pascalSmooth(n):
-    # 返回n阶的非归一化的高斯平滑算子
     pascalSmooth = np.zeros([1, n], np.float32)
     for i in  range(n):
         pascalSmooth[0][i] = math.factorial(n - 1) / (math.factorial(i) * math.factorial(n-1-i))
     return pascalSmooth
  
-def pascalDiff(n):      # 在一半之前是逐差法。。后半部分的值和前半部分对应
-    # 返回n阶差分算子
+def pascalDiff(n):      
     pascalDiff = np.zeros([1, n], np.float32)
     pascalSmooth_previous = pascalSmooth(n - 1)
     for i in range(n):
         if i == 0:
-            # 恒等于1
             pascalDiff[0][i] = pascalSmooth_previous[0][i]
         elif i == n-1:
             pascalDiff[0][i] = pascalSmooth_previous[0][i-1]
@@ -37,54 +34,33 @@ def pascalDiff(n):      # 在一半之前是逐差法。。后半部分的值和
     return pascalDiff
  
 def getSmoothKernel(n):
-    # 返回两个sobel算子
     pascalSmoothKernel = pascalSmooth(n)
     pascalDiffKernel = pascalDiff(n)
- 
-    # 水平方向上的卷积核
     sobelKernel_x = signal.convolve2d(pascalSmoothKernel.transpose(), pascalDiffKernel, mode='full')
-    # 垂直方向上的卷积核
     sobelKernel_y = signal.convolve2d(pascalSmoothKernel, pascalDiffKernel.transpose(), mode='full')
     return (sobelKernel_x, sobelKernel_y)
  
 def sobel(image, n):
  
     rows, cols = image.shape
-    # 得到平滑算子
     pascalSmoothKernel = pascalSmooth(n)
-    # 得到差分算子
     pascalDiffKernel = pascalDiff(n)
  
-    # 与水平方向的sobel核卷积
-    # 先进行垂直方向的平滑
     image_sobel_x = signal.convolve2d(image, pascalSmoothKernel.transpose(), mode='same')
-    # 再进行水平方向的差分
     image_sobel_x = signal.convolve2d(image_sobel_x, pascalDiffKernel, mode='same')
- 
-    # 与垂直方向的sobel核卷积
-    # 先进行水平方向的平滑
     image_sobel_y = signal.convolve2d(image, pascalSmoothKernel, mode='same')
     image_sobel_y = signal.convolve2d(image_sobel_y, pascalDiffKernel.transpose(), mode='same')
  
     return (image_sobel_x, image_sobel_y)
 
 def prewitt(I, _boundary = 'symm', ):
- 
-    # prewitt算子是可分离的。 根据卷积运算的结合律，分两次小卷积核运算
- 
-    # 算子分为两部分，这是对第一部分操作
-    # 1: 垂直方向上的均值平滑
     ones_y = np.array([[1], [1], [1]], np.float32)
     i_conv_pre_x = signal.convolve2d(I, ones_y, mode='same', boundary=_boundary)
-    # 2: 水平方向上的差分
     diff_x = np.array([[1, 0, -1]], np.float32)
     i_conv_pre_x = signal.convolve2d(i_conv_pre_x, diff_x, mode='same', boundary=_boundary)
  
-    # 算子分为两部分，这是对第二部分操作
-    # 1: 水平方向上的均值平滑
     ones_x = np.array([[1, 1, 1]], np.float32)
     i_conv_pre_y = signal.convolve2d(I, ones_x, mode='same', boundary=_boundary)
-    # 2: 垂直方向上的差分
     diff_y = np.array([[1], [0], [-1]], np.float32)
     i_conv_pre_y = signal.convolve2d(i_conv_pre_y, diff_y, mode='same', boundary=_boundary)
  
