@@ -58,19 +58,21 @@ def main() :
     args = parser.parse_args()
     prob = args.prob
     sigma=args.sigma
+    result=args.result
     imgpath='/home/zty/myGit/homeworks/cha2/lena.jpg'
     img=cv.imread(imgpath,cv.IMREAD_UNCHANGED)
     #print(img.shape)
     rows, cows=img.shape[0:2]
+
     #添加噪声
     imgSP = sp_noise(img, prob)
     imgGN = gasuss_noise(img, 0, 0.001)
     imgPL = pl_noise(img, prob)
-
+    #box滤波
     imgSPDN = cv.boxFilter(imgSP,-1, (3, 3), normalize=True)
     imgGNDN = cv.boxFilter(imgGN,-1, (5, 5), normalize=True)
     imgPLDN = cv.boxFilter(imgPL,-1, (7, 7), normalize=True)
-
+    #高斯滤波
     blurSP=cv.GaussianBlur(imgSP,(3,3),sigma)
     blurGN=cv.GaussianBlur(imgGN,(3,3),sigma)
     blurPL=cv.GaussianBlur(imgPL,(3,3),sigma)
@@ -87,7 +89,7 @@ def main() :
 
     cv.namedWindow("Result", cv.WINDOW_NORMAL)
     cv.resizeWindow("Result", int(cows*2), int(rows*2))
-    cv.imshow("Result", blurGN)
+    cv.imshow("Result", eval(result))
     cv.waitKey(0)
     cv.destroyAllWindows()
 
