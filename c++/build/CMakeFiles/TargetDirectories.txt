@@ -1,0 +1,3 @@
+/home/zty/myGit/homeworks/c++/build/CMakeFiles/edit_cache.dir
+/home/zty/myGit/homeworks/c++/build/CMakeFiles/rebuild_cache.dir
+/home/zty/myGit/homeworks/c++/build/CMakeFiles/Beverage_dispensers.dir

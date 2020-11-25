@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/zty/myGit/homeworks/c++/build",
+  "command": "/usr/bin/g++-5    -I/home/zty/myGit/homeworks/c++/include  -std=c++11 -O3 -DNDEBUG   -o CMakeFiles/Beverage_dispensers.dir/main.cpp.o -c /home/zty/myGit/homeworks/c++/main.cpp",
+  "file": "/home/zty/myGit/homeworks/c++/main.cpp"
+},
+{
+  "directory": "/home/zty/myGit/homeworks/c++/build",
+  "command": "/usr/bin/g++-5    -I/home/zty/myGit/homeworks/c++/include  -std=c++11 -O3 -DNDEBUG   -o CMakeFiles/Beverage_dispensers.dir/src/account.cpp.o -c /home/zty/myGit/homeworks/c++/src/account.cpp",
+  "file": "/home/zty/myGit/homeworks/c++/src/account.cpp"
+},
+{
+  "directory": "/home/zty/myGit/homeworks/c++/build",
+  "command": "/usr/bin/g++-5    -I/home/zty/myGit/homeworks/c++/include  -std=c++11 -O3 -DNDEBUG   -o CMakeFiles/Beverage_dispensers.dir/src/cmachine.cpp.o -c /home/zty/myGit/homeworks/c++/src/cmachine.cpp",
+  "file": "/home/zty/myGit/homeworks/c++/src/cmachine.cpp"
+},
+{
+  "directory": "/home/zty/myGit/homeworks/c++/build",
+  "command": "/usr/bin/g++-5    -I/home/zty/myGit/homeworks/c++/include  -std=c++11 -O3 -DNDEBUG   -o CMakeFiles/Beverage_dispensers.dir/src/customer.cpp.o -c /home/zty/myGit/homeworks/c++/src/customer.cpp",
+  "file": "/home/zty/myGit/homeworks/c++/src/customer.cpp"
+},
+{
+  "directory": "/home/zty/myGit/homeworks/c++/build",
+  "command": "/usr/bin/g++-5    -I/home/zty/myGit/homeworks/c++/include  -std=c++11 -O3 -DNDEBUG   -o CMakeFiles/Beverage_dispensers.dir/src/drink.cpp.o -c /home/zty/myGit/homeworks/c++/src/drink.cpp",
+  "file": "/home/zty/myGit/homeworks/c++/src/drink.cpp"
+},
+{
+  "directory": "/home/zty/myGit/homeworks/c++/build",
+  "command": "/usr/bin/g++-5    -I/home/zty/myGit/homeworks/c++/include  -std=c++11 -O3 -DNDEBUG   -o CMakeFiles/Beverage_dispensers.dir/src/supplier.cpp.o -c /home/zty/myGit/homeworks/c++/src/supplier.cpp",
+  "file": "/home/zty/myGit/homeworks/c++/src/supplier.cpp"
+}
+]
